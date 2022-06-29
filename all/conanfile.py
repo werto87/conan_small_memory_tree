@@ -3,11 +3,11 @@ from conans.tools import check_min_cppstd
 import os
 
 
-class ConfuJson(ConanFile):
-    name = "confu_json"
-    homepage = "https://github.com/werto87/confu_json"
-    description = "uses boost::fusion to help with serialization; json <-> user defined type"
-    topics = ("json parse", "serialization", "user defined type")
+class SmallMemoryTree(ConanFile):
+    name = "small_memory_tree"
+    homepage = "https://github.com/werto87/small_memory_tree"
+    description = "Compress sl_tree. Decompress compressed sl_tree"
+    topics = ("tree", "memory")
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     settings = "compiler"
@@ -23,7 +23,10 @@ class ConfuJson(ConanFile):
         self.options["boost"].header_only = True
 
     def requirements(self):
-        self.requires("boost/1.76.0")
+        self.requires("catch2/2.13.9")
+        self.requires("st_tree/1.2.1")
+        self.requires("range-v3/0.12.0")
+        self.requires("boost/1.78.0")
 
     def source(self):
         tools.get(**self.conan_data["sources"][self.version])
@@ -32,8 +35,9 @@ class ConfuJson(ConanFile):
 
     def package(self):
         # This should lead to an Include path like #include "include_folder/IncludeFile.hxx"
-        self.copy("*.h*", dst="include/confu_json",
-                  src="source_subfolder/confu_json")
+        self.copy("*.h*",
+                  dst="include/small_memory_tree",
+                  src="source_subfolder/small_memory_tree")
 
     def package_id(self):
         self.info.header_only()
