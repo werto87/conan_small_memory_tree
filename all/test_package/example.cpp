@@ -1,18 +1,14 @@
-#include "confu_json/to_json.hxx"
-#include "confu_json/to_object.hxx"
-#include <boost/fusion/adapted/struct/adapt_struct.hpp>
-#include <boost/json/src.hpp> // this file should be included only in one translation unit
-
-BOOST_FUSION_DEFINE_STRUCT((shared_class), Nested,
-                           (long, answer)) // used to define a struct
-
+#include <small_memory_tree/small_memory_tree.hxx>
+#include <st_tree.h>
 int main() {
-  using namespace confu_json;
-  auto nested = shared_class::Nested{};
-  nested.answer = 42;
-  std::cout << to_json(nested)
-            << std::endl; // converts the struct into json and prints it
-  auto nestedTest = to_object<shared_class::Nested>(
-      to_json(nested)); // converts the struct into json and back into an object
-  assert(nested.answer == nestedTest.answer);
+  auto tree = st_tree::tree<int>{};
+  tree.insert(1);
+  tree.root().insert(2);
+  tree.root().insert(3);
+  tree.root()[0].insert(4);
+  tree.root()[0][0].insert(42);
+  tree.root()[1].insert(42);
+  tree.root()[1][0].insert(42);
+  assert(small_memory_tree::vectorToTree(
+             small_memory_tree::treeToVector(tree, 255, 254), 255, 2) == tree);
 }

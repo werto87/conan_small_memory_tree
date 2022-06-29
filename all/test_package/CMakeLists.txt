@@ -5,5 +5,8 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
 add_executable(${PROJECT_NAME} example.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE CONAN_PKG::small_memory_tree)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    CONAN_PKG::small_memory_tree
+    CONAN_PKG::st_tree
+)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
