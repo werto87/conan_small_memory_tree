@@ -23,7 +23,6 @@ class SmallMemoryTree(ConanFile):
         self.options["boost"].header_only = True
 
     def requirements(self):
-        self.requires("catch2/2.13.9")
         self.requires("st_tree/1.2.1")
         self.requires("range-v3/0.12.0")
         self.requires("boost/1.78.0")
