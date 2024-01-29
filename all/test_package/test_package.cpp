@@ -8,7 +8,7 @@ int main() {
   tree.root ().insert (2);
   auto smt = small_memory_tree::SmallMemoryTree<int>{ tree, 255 };
   auto myChildren = small_memory_tree::childrenByPath (smt, { 0 });
-  if( myChildren.size () == 2 && myChildren.at (0) == 1 && myChildren.at (1) == 2){
+  if( myChildren->size () == 2 && myChildren->at (0) == 1 && myChildren->at (1) == 2){
       std::cout<<"it works"<<std::endl;
     }
   else

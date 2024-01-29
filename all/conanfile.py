@@ -28,7 +28,7 @@ class SmallMemoryTree(ConanFile):
         self.options["fmt"].header_only = True
 
     def requirements(self):
-        self.requires("boost/1.83.0", force=True)
+        self.requires("boost/1.84.0", force=True)
         self.requires("st_tree/1.2.1")
         self.requires("confu_algorithm/0.0.1")
 
