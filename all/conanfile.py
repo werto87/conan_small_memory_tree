@@ -1,11 +1,8 @@
 from conan import ConanFile
-from conan.errors import ConanInvalidConfiguration
 from conan.tools.build import check_min_cppstd
-from conan.tools.files import copy, get
-from conan.tools.layout import basic_layout
-from conan.tools.microsoft import is_msvc
-from conan.tools.scm import Version
-import os
+from conan.tools.cmake import CMake, cmake_layout
+from conan.tools.files import get
+
 
 
 class SmallMemoryTree(ConanFile):
@@ -17,7 +14,8 @@ class SmallMemoryTree(ConanFile):
     url = "https://github.com/conan-io/conan-center-index"
     package_type = "header-library"
     settings = "os", "arch", "compiler", "build_type"
-    no_copy_source = True
+    generators = "CMakeDeps", "CMakeToolchain"
+
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
 
@@ -32,7 +30,11 @@ class SmallMemoryTree(ConanFile):
         self.requires("st_tree/1.2.1")
         self.requires("confu_algorithm/0.0.1")
 
+    def layout(self):
+        cmake_layout(self, src_folder=self.name+"-"+str(self.version))
+
     def package(self):
-        copy(self, "*.h*", src=os.path.join(self.source_folder, self.name),
-             dst=os.path.join(self.package_folder, "include", self.name))
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.install()
 
