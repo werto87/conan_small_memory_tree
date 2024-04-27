@@ -2,7 +2,7 @@ from conan import ConanFile
 from conan.tools.build import check_min_cppstd
 from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.files import get
-
+from conan.tools.cmake import CMakeToolchain
 
 
 class SmallMemoryTree(ConanFile):
@@ -14,7 +14,13 @@ class SmallMemoryTree(ConanFile):
     url = "https://github.com/conan-io/conan-center-index"
     package_type = "header-library"
     settings = "os", "arch", "compiler", "build_type"
-    generators = "CMakeDeps", "CMakeToolchain"
+    generators =  "CMakeDeps"
+
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.user_presets_path = False #workaround because this leads to useless options in cmake-tools configure
+        tc.generate()
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
