@@ -28,7 +28,7 @@ class SmallMemoryTree(ConanFile):
     def requirements(self):
         self.requires("boost/1.84.0")
         self.requires("st_tree/1.2.1")
-        self.requires("confu_algorithm/0.0.1")
+        self.requires("confu_algorithm/1.0.1")
 
     def layout(self):
         cmake_layout(self, src_folder=self.name+"-"+str(self.version))
