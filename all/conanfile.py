@@ -15,11 +15,17 @@ class SmallMemoryTree(ConanFile):
     package_type = "header-library"
     settings = "os", "arch", "compiler", "build_type"
     generators =  "CMakeDeps"
-
+    options = {
+        "with_st_tree": [True, False],
+    }
+    default_options = {
+        "with_st_tree": False,
+    }
 
     def generate(self):
         tc = CMakeToolchain(self)
         tc.user_presets_path = False #workaround because this leads to useless options in cmake-tools configure
+        tc.variables["WITH_ST_TREE"] = self.options.with_st_tree
         tc.generate()
 
     def source(self):
@@ -33,7 +39,8 @@ class SmallMemoryTree(ConanFile):
 
     def requirements(self):
         self.requires("boost/1.84.0")
-        self.requires("st_tree/1.2.1")
+        if self.options.with_st_tree:
+            self.requires("st_tree/1.2.1")
         self.requires("confu_algorithm/1.0.1")
 
     def layout(self):
@@ -41,6 +48,7 @@ class SmallMemoryTree(ConanFile):
 
     def package(self):
         cmake = CMake(self)
+        # cmake.configure(variables={"-DWITH_ST_TREE":True})
         cmake.configure()
         cmake.install()
 
