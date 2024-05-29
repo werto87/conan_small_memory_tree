@@ -1,5 +1,5 @@
 sources:
-  "5.1.2":
-    url: https://github.com/werto87/small_memory_tree/archive/refs/tags/v5.1.2.tar.gz
-    sha256: 228c776d3fe7a3de357a0b79625319d0de2bbd0801a9c1c8af24c2029ccecf83
+  "5.2.0":
+    url: https://github.com/werto87/small_memory_tree/archive/refs/tags/v5.2.0.tar.gz
+    sha256: f04448edd38e4132a214312092f166c4180922ae324e58a4e796fb8078f9e001
 

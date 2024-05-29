@@ -46,7 +46,7 @@ class SmallMemoryTree(ConanFile):
             self.requires("st_tree/1.2.1")
         if self.options.with_stlplus_tree:
             self.requires("stlplus/3.16.0")            
-        self.requires("confu_algorithm/1.0.1")
+        self.requires("confu_algorithm/1.1.0")
 
     def layout(self):
         cmake_layout(self, src_folder=self.name+"-"+str(self.version))
