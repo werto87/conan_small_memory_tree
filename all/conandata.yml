@@ -1,5 +1,9 @@
 sources:
-  "7.0.1":
-    url: https://github.com/werto87/small_memory_tree/archive/refs/tags/v7.0.1.tar.gz
-    sha256: e077d8b366b2e4bd9f316b43aa9c7286d02c8416b5fc2593562b57fca2578085
+  "7.0.3":
+    url: https://github.com/werto87/small_memory_tree/archive/refs/tags/v7.0.3.tar.gz
+    sha256: 32ea58720bcd48d0cc452f40f5de40d1389f28807f2d69a6710d9f5a4ed797e3
+
+  "7.0.5":
+    url: https://github.com/werto87/small_memory_tree/archive/refs/tags/v7.0.5.tar.gz
+    sha256: 426627a261d431d6ca25a3ee53ceee57b94b25a70660f712b8a49c0ae5280264
 
