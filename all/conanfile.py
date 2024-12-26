@@ -37,11 +37,10 @@ class SmallMemoryTree(ConanFile):
     def configure(self):
         if self.settings.compiler.cppstd:
             check_min_cppstd(self, "20")
-        self.options["boost"].header_only = True
         self.options["fmt"].header_only = True
 
     def requirements(self):
-        self.requires("boost/1.84.0")
+        self.requires("boost/1.85.0")
         if self.options.with_st_tree:
             self.requires("st_tree/1.2.1")
         if self.options.with_stlplus_tree:
@@ -56,3 +55,9 @@ class SmallMemoryTree(ConanFile):
         cmake.configure()
         cmake.install()
 
+    def package_info(self):
+        self.cpp_info.components[self.name].requires = ["boost::headers","confu_algorithm::confu_algorithm"]
+        if self.options.with_st_tree:
+            self.cpp_info.components[self.name].requires.append("st_tree::st_tree")
+        if self.options.with_stlplus_tree:
+            self.cpp_info.components[self.name].requires.append("stl_plus::stl_plus")  
